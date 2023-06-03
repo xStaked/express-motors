@@ -31,8 +31,34 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-    const id = req.params.id;
-    res.send(`User with id ${id}`);
+    try {
+        const id = req.params.id;
+        const user = await User.findOne({
+            where: {
+                id,
+            },
+        });
+
+        if (!user) {
+            return res.status(404).json({
+                status: 'error',
+                message: 'No user found',
+            });
+        }
+
+        res.json({
+            status: 'success',
+            message: `User with id ${id}`,
+            data: {
+                user,
+            },
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Unable to get user',
+        });
+    }
 };
 
 const updateUserById = async (req, res) => {

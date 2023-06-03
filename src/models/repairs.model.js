@@ -12,11 +12,13 @@ const Repair = db.define('repairs', {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    //* Change for ENUM
     status: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING(50),
         allowNull: false,
-        defaultValue: true,
+        defaultValue: 'pending',
     },
+    //* We need to add the foreign key
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,

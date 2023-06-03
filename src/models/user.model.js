@@ -25,10 +25,11 @@ const User = db.define('users', {
         allowNull: false,
         defaultValue: 'user',
     },
+    //* Change for ENUM
     status: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING(50),
         allowNull: false,
-        defaultValue: true,
+        defaultValue: 'available',
     },
 });
 

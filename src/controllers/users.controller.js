@@ -61,28 +61,39 @@ const getUserById = async (req, res) => {
     }
 };
 
+const createUser = async (req, res) => {
+    try {
+        const { name, email, password, role, status } = req.body;
+        if (!name || !email || !password || !role || !status) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required fields',
+            });
+        }
+        await User.create({
+            name,
+            email,
+            password,
+            role,
+            status,
+        });
+        res.json({
+            status: 'success',
+            message: 'User created',
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Unable to create user',
+        });
+    }
+};
 const updateUserById = async (req, res) => {
     const id = req.params.id;
     const body = req.body;
     const name = body.name;
     const email = body.email;
     res.send(`User with id ${id} updated`);
-};
-
-const createUser = async (req, res) => {
-    const body = req.body;
-    const name = body.name;
-    const email = body.email;
-    const password = body.password;
-    const role = body.role;
-    res.send(`User ${name} created`);
-    //   res.json({
-    //     name,
-    //     email,
-    //     password,
-    //     role,
-    //     message: `User ${name} created`,
-    //   });
 };
 
 const deleteUserById = async (req, res) => {

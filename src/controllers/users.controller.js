@@ -122,8 +122,34 @@ const updateUserById = async (req, res) => {
 };
 
 const deleteUserById = async (req, res) => {
-    const id = req.params.id;
-    res.send(`User with id ${id} deleted`);
+    try {
+        const id = req.params.id;
+        const user = await User.findOne({
+            where: {
+                id,
+                status: 'available',
+            },
+        });
+        if (!user) {
+            return res.status(404).json({
+                status: 'error',
+                message: 'No user found',
+            });
+        }
+
+        await user.update({
+            status: 'deleted',
+        });
+        res.json({
+            status: 'success',
+            message: `User with id ${id} deleted`,
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Unable to delete user',
+        });
+    }
 };
 
 module.exports = {

@@ -60,7 +60,7 @@ Start the server
 #### Edit user
 
 ```http
-  POST /api/v1/users/${id}
+  PATCH /api/v1/users/${id}
 ```
 
 | Parameter | Type     | Description              |
@@ -105,7 +105,7 @@ Start the server
 ##### **status change to completed**
 
 ```http
-  POST  /api/v1/repairs/${id}
+  PATCH  /api/v1/repairs/${id}
 ```
 
 #### Delete repair

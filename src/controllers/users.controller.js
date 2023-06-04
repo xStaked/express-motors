@@ -70,6 +70,20 @@ const createUser = async (req, res) => {
                 message: 'Missing required fields',
             });
         }
+
+        const user = await User.findOne({
+            where: {
+                email,
+            },
+        });
+
+        if (user) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Email already exists',
+            });
+        }
+
         await User.create({
             name,
             email,

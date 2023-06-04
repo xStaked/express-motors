@@ -14,7 +14,7 @@ const getAllRepais = async (req, res) => {
                 message: 'No repairs found',
             });
         }
-
+        const date = new Date();
         res.json({
             status: 'success',
             results: repairs.length,
@@ -22,6 +22,7 @@ const getAllRepais = async (req, res) => {
             data: {
                 repairs,
             },
+            date,
         });
     } catch (err) {
         res.status(500).json({
@@ -81,6 +82,7 @@ const createRepair = async (req, res) => {
         res.status(500).json({
             status: 'error',
             message: 'Unable to create repair',
+            error: err,
         });
     }
 };

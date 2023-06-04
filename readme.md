@@ -7,7 +7,7 @@ Simple backend for managing a motorcycle repair company
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/xStaked/express-motors.git
 ```
 
 Go to the project directory

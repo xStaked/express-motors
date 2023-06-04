@@ -1,3 +1,4 @@
+require('dotenv').config();
 const app = require('./app.js');
 const { db } = require('./database/config.js');
 
@@ -17,7 +18,7 @@ db.sync()
         console.log('Unable to sync the database:', err);
     });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is up on port ${port}.`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is up on PORT ${PORT}.`);
 });

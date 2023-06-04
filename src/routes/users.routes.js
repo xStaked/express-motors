@@ -8,8 +8,7 @@ const {
     deleteUserById,
 } = require('../controllers/users.controller.js');
 
-router.get('/', getAllUsers);
+router.route('/').get(getAllUsers).post(createUser);
 router.route('/:id').get(getUserById).patch(updateUserById).delete(deleteUserById);
-router.post('/', createUser);
 
 module.exports = router;

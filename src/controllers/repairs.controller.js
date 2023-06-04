@@ -38,6 +38,7 @@ const getRepairById = async (req, res) => {
         const repair = await Repair.findOne({
             where: {
                 id,
+                status: 'pending',
             },
         });
 

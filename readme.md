@@ -55,7 +55,7 @@ Start the server
 | `name`     | `string` | **Required**                      |
 | `email`    | `string` | **Required**                      |
 | `password` | `string` | **Required**                      |
-| `role`     | `string` | **Required**. client or employeee |
+| `role`     | `string` | **Required**. client or employee |
 
 #### Edit user
 

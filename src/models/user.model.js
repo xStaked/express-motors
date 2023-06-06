@@ -23,13 +23,13 @@ const User = db.define('users', {
     },
     //* Need to change for ENUM
     role: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM('employee', 'client'),
         allowNull: false,
         defaultValue: 'employee',
     },
     //* Need to change for ENUM
     status: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM('available', 'unavailable'),
         allowNull: false,
         defaultValue: 'available',
     },

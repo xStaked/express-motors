@@ -151,7 +151,7 @@ const deleteUserById = async (req, res) => {
         }
 
         await user.update({
-            status: 'deleted',
+            status: 'unavailable',
         });
         res.status(200).json({
             status: 'success',

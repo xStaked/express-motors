@@ -14,7 +14,7 @@ const getAllUsers = async (req, res) => {
             });
         }
 
-        res.json({
+        res.status(200).json({
             status: 'success',
             results: users.length,
             message: 'All users',
@@ -46,7 +46,7 @@ const getUserById = async (req, res) => {
             });
         }
 
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `User with id ${id}`,
             data: {
@@ -90,7 +90,7 @@ const createUser = async (req, res) => {
             password,
             role,
         });
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: 'User created',
         });
@@ -122,7 +122,7 @@ const updateUserById = async (req, res) => {
             name,
             email,
         });
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `User with id ${id} updated`,
         });
@@ -153,7 +153,7 @@ const deleteUserById = async (req, res) => {
         await user.update({
             status: 'deleted',
         });
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `User with id ${id} deleted`,
         });

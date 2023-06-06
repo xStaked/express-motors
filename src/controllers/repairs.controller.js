@@ -14,7 +14,7 @@ const getAllRepais = async (req, res) => {
                 message: 'No repairs found',
             });
         }
-        res.json({
+        res.status(200).json({
             status: 'success',
             results: repairs.length,
             message: 'All repairs',
@@ -47,7 +47,7 @@ const getRepairById = async (req, res) => {
             });
         }
 
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `Repair with id ${id}`,
             data: {
@@ -70,7 +70,7 @@ const createRepair = async (req, res) => {
             userId,
         });
 
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             message: 'Repair created',
             data: {
@@ -107,7 +107,7 @@ const updateRepairById = async (req, res) => {
             status: 'completed',
         });
 
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `Repair with id ${id} updated`,
         });
@@ -140,7 +140,7 @@ const deleteRepairById = async (req, res) => {
             status: 'cancelled',
         });
 
-        res.json({
+        res.status(200).json({
             status: 'success',
             message: `Repair with id ${id} deleted`,
         });

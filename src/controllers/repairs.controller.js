@@ -32,24 +32,11 @@ const getAllRepais = async (req, res) => {
 
 const getRepairById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const repair = await Repair.findOne({
-            where: {
-                id,
-                status: 'pending',
-            },
-        });
-
-        if (!repair) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No repair found',
-            });
-        }
+        const { repair } = req;
 
         res.status(200).json({
             status: 'success',
-            message: `Repair with id ${id}`,
+            message: `Repair with id ${repair.id}`,
             data: {
                 repair,
             },
@@ -88,20 +75,7 @@ const createRepair = async (req, res) => {
 
 const updateRepairById = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        const repair = await Repair.findOne({
-            where: {
-                id,
-            },
-        });
-
-        if (!repair) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No repair found',
-            });
-        }
+        const { repair } = req;
 
         await repair.update({
             status: 'completed',
@@ -109,7 +83,7 @@ const updateRepairById = async (req, res) => {
 
         res.status(200).json({
             status: 'success',
-            message: `Repair with id ${id} updated`,
+            message: `Repair with id ${repair.id} updated`,
         });
     } catch (err) {
         res.status(500).json({
@@ -121,28 +95,14 @@ const updateRepairById = async (req, res) => {
 
 const deleteRepairById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const repair = await Repair.findOne({
-            where: {
-                id,
-                status: 'pending',
-            },
-        });
-
-        if (!repair) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No repair found',
-            });
-        }
-
+        const { repair } = req;
         await repair.update({
             status: 'cancelled',
         });
 
         res.status(200).json({
             status: 'success',
-            message: `Repair with id ${id} deleted`,
+            message: `Repair with id ${repair.id} deleted`,
         });
     } catch (err) {
         res.status(500).json({

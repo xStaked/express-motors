@@ -1,10 +1,10 @@
-const User = require('../models/user.model');
+const { User } = require('../models/user.model');
 
 exports.validateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const user = User.findOne({
+        const user = await User.findOne({
             where: {
                 id,
                 status: 'available',

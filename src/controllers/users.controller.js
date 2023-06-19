@@ -32,23 +32,11 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const id = req.params.id;
-        const user = await User.findOne({
-            where: {
-                id,
-            },
-        });
-
-        if (!user) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No user found',
-            });
-        }
+        const { user } = req;
 
         res.status(200).json({
             status: 'success',
-            message: `User with id ${id}`,
+            message: `User with id ${user.id}`,
             data: {
                 user,
             },
@@ -57,6 +45,7 @@ const getUserById = async (req, res) => {
         res.status(500).json({
             status: 'error',
             message: 'Unable to get user',
+            err,
         });
     }
 };
@@ -103,28 +92,16 @@ const createUser = async (req, res) => {
 };
 const updateUserById = async (req, res) => {
     try {
-        const id = req.params.id;
         const { name, email } = req.body;
-        const user = await User.findOne({
-            where: {
-                id,
-                status: 'available',
-            },
-        });
+        const { user } = req;
 
-        if (!user) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No user found',
-            });
-        }
         await user.update({
             name,
             email,
         });
         res.status(200).json({
             status: 'success',
-            message: `User with id ${id} updated`,
+            message: `User with id ${user.id} updated`,
         });
     } catch (err) {
         res.status(500).json({
@@ -136,26 +113,14 @@ const updateUserById = async (req, res) => {
 
 const deleteUserById = async (req, res) => {
     try {
-        const id = req.params.id;
-        const user = await User.findOne({
-            where: {
-                id,
-                status: 'available',
-            },
-        });
-        if (!user) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'No user found',
-            });
-        }
+        const { user } = req;
 
         await user.update({
             status: 'unavailable',
         });
         res.status(200).json({
             status: 'success',
-            message: `User with id ${id} deleted`,
+            message: `User with id ${user.id} deleted`,
         });
     } catch (err) {
         res.status(500).json({
